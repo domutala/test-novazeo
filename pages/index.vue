@@ -96,19 +96,27 @@ export default class extends Vue {
   }
 
   todraw() {
-    if (this.step < 0) return
+    // ne pas exécuter cette fonction
+    // si le compteur de tirage atteind 0.
+    if (this.step <= 0) return
 
+    // au début
     if (this.step === 3) {
       this.cards = this.draw()
       this.step -= 1
-    } else if (this.selectedCards.length) {
+    }
+    // vérifier si une carte est sélectionnée
+    else if (this.selectedCards.length) {
+      // piocher de nouveaux carte
       const cards = this.draw(this.selectedCards.length)
 
+      // remplacer les carte selectionnées par les nouveaux cartes piochées
       for (let i = 0; i < this.selectedCards.length; i++) {
         const index = this.selectedCards[i]
         this.cards[index] = cards[i]
       }
 
+      // désactiver les carte non selectionnées
       for (let i = 0; i < this.cards.length; i++) {
         if (!this.selectedCards.includes(i)) this.fixedCards.push(i)
       }
@@ -132,7 +140,7 @@ export default class extends Vue {
       const i = Math.floor(Math.random() * pool.length)
       const card = pool[i]
 
-      // vérifier si la carte n'est pas déjà choisie
+      // vérifier si la carte n'est pas déjà choisie ou piochée
       const isIn =
         cards.findIndex((cd) => cd.id === card.id) === -1 &&
         this.cards.findIndex((cd) => cd.id === card.id) === -1
