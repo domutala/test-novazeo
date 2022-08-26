@@ -18,7 +18,13 @@
     </div>
 
     <div v-if="!showScore" class="foot">
-      <button v-if="step !== 0" @click="todraw">Draw ({{ step }})</button>
+      <button
+        v-if="step !== 0"
+        :disabled="step !== 3 && !selectedCards.length"
+        @click="todraw"
+      >
+        Draw ({{ step }})
+      </button>
       <button v-if="step !== 3" @click="showScore = true">Finalize</button>
     </div>
     <div v-else class="foot">
@@ -193,11 +199,16 @@ export default class extends Vue {
     color: #fff;
     border: 0;
     border-radius: 0.6em;
-    cursor: pointer;
     margin: 5px;
+    opacity: 0.5;
 
-    &:hover {
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    &:not(:disabled) {
+      cursor: pointer;
+      opacity: 1;
+
+      &:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      }
     }
   }
 }

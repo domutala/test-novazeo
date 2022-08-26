@@ -1,7 +1,14 @@
 {
   "name": "test-novazeo",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
+  "repository": {
+    "url": "https://github.com/domutala/test-novazeo"
+  },
+  "author": {
+    "name": "domutala",
+    "url": "https://github.com/domutala"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
